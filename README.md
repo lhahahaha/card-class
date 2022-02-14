@@ -3,6 +3,8 @@ class for instantiation of card objects
 
 current issue: cannot change the location of the images, the (x, y) coordinates are fixed to the __init__ method and when the object is instantiated; the values cannot be changed
 
+images used for current test are uploaded as pngs if needed
+
 Run down of the different sections of my code
 1. initialisation of card attributes:
 
