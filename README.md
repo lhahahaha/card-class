@@ -3,11 +3,15 @@ class for instantiation of card objects
 
 current issue: cannot change the location of the images, the (x, y) coordinates are fixed to the __init__ method and when the object is instantiated; the values cannot be changed
 images used for current test are uploaded as pngs if needed
-FOR THE RELEVANT ISSUES AROUND CHANGING THE (X, Y) COORDINATES
-read from lines 10 - 62
-jump to lines 525 - 527
-then jump to lines 558 - 627
 
+
+FOR THE RELEVANT ISSUES AROUND CHANGING THE (X, Y) COORDINATES
+
+1. read from lines 10 - 62
+2. jump to lines 525 - 527 
+3. then jump to lines 558 - 627
+
+-------------------------------------------------------------------------------
 Run down of the different sections of my code
 1. initialisation of card attributes:
 
