@@ -7,13 +7,14 @@ from buttonclass import Button
 from font import orangeKid, pcSenior
 pygame.init()
 
+#===========================please check the sections i've blocked out please======================================
 #mainFont = pygame.font.Font(orangeKid, 100)
 SCREEN = pygame.display.set_mode((1250, 938))
 
 class card:
     def __init__(self, pos, image, card, name, rank, typec, hp):
         # allows for instantiation of an object of the card class
-        # right, left, front card, back card
+        # right facing image, left facing image, front of the card, back of the card
         self.x = pos[0]
         self.y = pos[1]
 
@@ -29,10 +30,8 @@ class card:
 
         self.name = name
         self.rank = rank
-        self.typec = typec
+        self.typec = typec # 'type' is already a command
         self.hp = hp
-
-
 
     def back(self, screen): # shows back of card
         screen.blit(self.cardB, self.rectB) # display image and rect on screen
@@ -46,22 +45,23 @@ class card:
             return True
         return False
 
-    def reveal(self, screen):
+    def reveal(self, screen): # show the left facing character image
         screen.blit(self.imageL, self.rectL)
         
-    # change the coordinates of the original object
+    # change the coordinates of the original object: doesn't do anything
     def add(self, user, p):
         user.x = self.x - p[0]
         user.y = self.y - p[1]
 
-    # allows for change in attributes B)
+    # allows for change in attributes - doesn't do anything
     #def changeCoords(self, pos):
         #self.x = pos[0]
         #self.y = pos[1]
         #return(self.x, self.y)
 
+#===============================================JUMP TO LINE 525=============================================
+        
     def bA(self, user):
-
         # ensures each round the total attack value is random and ensures the chance for critical attacks are random
         if user.rank == "IV":
             baseAttk = random.randint(17, 20)
@@ -515,7 +515,21 @@ cRightIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters
 QEPSI_IV = card(pos=(200, 200), image=(QLEFTIV, QRIGHTIV), card=(QRIGHTIV, BACKCARD), name="Qepsi IV", rank="IV", typec="Hearts", hp=225)
 QEPSI_III = card(pos=(200, 200), image=(QLEFTIII, QRIGHTIII), card=(QFRONTIII, BACKCARD), name="Qepsi III", rank="III", typec="Hearts", hp=175)
 QEPSI_II = card(pos=(200, 200), image=(QLEFTII, QRIGHTII), card=(QFRONTII, BACKCARD), name="Qepsi II", rank="II", typec="Hearts", hp=125)
+
+
+
+
+
+
+
+#=====================================this is the only one that matters atm==========================================================
 QEPSI_I = card(pos=(625, 469), image=(QLEFTI, QRIGHTI), card=(QFRONTI, BACKCARD), name="Qepsi I", rank="I", typec="Hearts", hp= 75)
+#=================================================JUMP TO LINE 557=======================================================
+
+
+
+
+
 
 #Spades
 mangoIV = card(pos=(200, 200), image=(mLeftI, mRightI), card=(mFrontI, BACKCARD), name="Mango IV", rank="IV", typec="Spades", hp=225)
