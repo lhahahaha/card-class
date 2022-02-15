@@ -1,37 +1,30 @@
 import random, pygame, os, sys, font
-from turtle import back, position
-from re import T
-import secrets
-from winreg import QueryReflectionKey
-from buttonclass import Button
 from font import orangeKid, pcSenior
 pygame.init()
 
-#===========================please check the sections i've blocked out please======================================
-#mainFont = pygame.font.Font(orangeKid, 100)
 SCREEN = pygame.display.set_mode((1250, 938))
 
 class card:
-    def __init__(self, pos, image, card, name, rank, typec, hp):
+    def __init__(self, image, card, name, rank, typec, hp):
         # allows for instantiation of an object of the card class
-        # right facing image, left facing image, front of the card, back of the card
-        self.x = pos[0]
-        self.y = pos[1]
-
         self.imageL = image[0]
         self.imageR = image[1]
-        self.rectL = self.imageL.get_rect(center=(self.x, self.y))
-        self.rectR = self.imageR.get_rect(center=(self.x, self.y))
 
         self.cardF = card[0]
         self.cardB = card[1]
-        self.rectF = self.cardF.get_rect(center=(self.x, self.y))
-        self.rectB = self.cardB.get_rect(center=(self.x, self.y))
 
         self.name = name
         self.rank = rank
-        self.typec = typec # 'type' is already a command
+        self.typec = typec
         self.hp = hp
+
+    def coords(self, pos):
+        self.x = pos[0]
+        self.y = pos[1]
+        self.rectL = self.imageL.get_rect(center=(self.x, self.y))
+        self.rectR = self.imageR.get_rect(center=(self.x, self.y))
+        self.rectF = self.cardF.get_rect(center=(self.x, self.y))
+        self.rectB = self.cardB.get_rect(center=(self.x, self.y))
 
     def back(self, screen): # shows back of card
         screen.blit(self.cardB, self.rectB) # display image and rect on screen
@@ -45,23 +38,11 @@ class card:
             return True
         return False
 
-    def reveal(self, screen): # show the left facing character image
+    def reveal(self, screen):
         screen.blit(self.imageL, self.rectL)
-        
-    # change the coordinates of the original object: doesn't do anything
-    def add(self, user, p):
-        user.x = self.x - p[0]
-        user.y = self.y - p[1]
-
-    # allows for change in attributes - doesn't do anything
-    #def changeCoords(self, pos):
-        #self.x = pos[0]
-        #self.y = pos[1]
-        #return(self.x, self.y)
-
-#===============================================JUMP TO LINE 525=============================================
-        
+    
     def bA(self, user):
+
         # ensures each round the total attack value is random and ensures the chance for critical attacks are random
         if user.rank == "IV":
             baseAttk = random.randint(17, 20)
@@ -451,60 +432,59 @@ QRIGHTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters
 #------------------------------------------------------------------------------------------------------------------------------------
 
 # spades
-mFrontI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango', 'Mfront1.png')).convert_alpha()
-mLeftI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango','1-mango-L.png')).convert_alpha()
-mRightI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango','1-mango-R.png')).convert_alpha()
+MFRONTI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango', 'Mfront1.png')).convert_alpha()
+MLEFTI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0mango','Lmango1.png')).convert_alpha()
+MRIGHTI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0mango','Rmango1.png')).convert_alpha()
 
-mFrontII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango', 'Mfront2.png')).convert_alpha()
-mLeftII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango','2-mango-L.png')).convert_alpha()
-mRightII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango','2-mango-R.png')).convert_alpha()
+MFRONTII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango', 'Mfront2.png')).convert_alpha()
+MLEFTII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0mango','Lmango2.png')).convert_alpha()
+MRIGHTII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0mango','Rmango2.png')).convert_alpha()
 
-mFrontIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango', 'Mfront3.png')).convert_alpha()
-mLeftIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango','3-mango-L.png')).convert_alpha()
-mRightIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango','3-mango-R.png')).convert_alpha()
+MFRONTIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango', 'Mfront3.png')).convert_alpha()
+MLEFTIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0mango','Lmango3.png')).convert_alpha()
+MRIGHTIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0mango','Rmango3.png')).convert_alpha()
 
-mFrontIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango', 'Mfront4.png')).convert_alpha()
-mLeftIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango','4-mango-L.png')).convert_alpha()
-mRightIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango','4-mango-R.png')).convert_alpha()
+MFRONTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','mango', 'Mfront4.png')).convert_alpha()
+MLEFTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0mango','Lmango4.png')).convert_alpha()
+MRIGHTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0mango','Rmango4.png')).convert_alpha()
 
 #------------------------------------------------------------------------------------------------------------------------------------
 
 # diamonds
-rFrontI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river', 'Rfront1.png')).convert_alpha()
-rLeftI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river','1-river-L.png')).convert_alpha()
-rRightI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river','1-river-R.png')).convert_alpha()
+RFRONTI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river', 'Rfront1.png')).convert_alpha()
+RLEFTI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0river','Lriver1.png')).convert_alpha()
+RRIGHTI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0river','Rriver1.png')).convert_alpha()
 
-rFrontII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river', 'Rfront2.png')).convert_alpha()
-rLeftII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river','2-river-L.png')).convert_alpha()
-rRightII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river','2-river-R.png')).convert_alpha()
+RFRONTII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river', 'Rfront2.png')).convert_alpha()
+RLEFTII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0river','Lriver2.png')).convert_alpha()
+RRIGHTII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0river','Rriver2.png')).convert_alpha()
 
-rFrontIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river', 'Rfront3.png')).convert_alpha()
-rLeftIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river','3-river-L.png')).convert_alpha()
-rRightIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river','3-river-R.png')).convert_alpha()
-
-rFrontIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river', 'Rfront4.png')).convert_alpha()
-rLeftIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river','4-river-L.png')).convert_alpha()
-rRightIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river','4-river-R.png')).convert_alpha()
+RFRONTIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river', 'Rfront3.png')).convert_alpha()
+RLEFTIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0river','Lriver3.png')).convert_alpha()
+RRIGHTIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0river','Rriver3.png')).convert_alpha()
+  
+RFRONTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','river', 'Rfront4.png')).convert_alpha()
+RLEFTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0river','Lriver4.png')).convert_alpha()
+RRIGHTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0river','Rriver4.png')).convert_alpha()
 
 #------------------------------------------------------------------------------------------------------------------------------------
 
 # clovers
-cFrontI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry', 'Cfront1.png')).convert_alpha()
-cLeftI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry','1-cherry-L.png')).convert_alpha()
-cRightI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry','1-cherry-R.png')).convert_alpha()
+CFRONTI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry', 'Cfront1.png')).convert_alpha()
+CLEFTI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0cherry','Lcherry1.png')).convert_alpha()
+CRIGHTI = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0cherry','Rcherry1.png')).convert_alpha()
 
-cFrontII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry', 'Cfront2.png')).convert_alpha()
-cLeftII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry','2-cherry-L.png')).convert_alpha()
-cRightII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry','2-cherry-R.png')).convert_alpha()
+CFRONTII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry', 'Cfront2.png')).convert_alpha()
+CLEFTII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0cherry','Lcherry2.png')).convert_alpha()
+CRIGHTII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0cherry','Rcherry2.png')).convert_alpha()
 
-cFrontIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry', 'Cfront3.png')).convert_alpha()
-cLeftIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry','3-cherry-L.png')).convert_alpha()
-cRightIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry','3-cherry-R.png')).convert_alpha()
+CFRONTIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry', 'Cfront3.png')).convert_alpha()
+CLEFTIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0cherry','Lcherry3.png')).convert_alpha()
+CRIGHTIII = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0cherry','Rcherry3.png')).convert_alpha()
 
-cFrontIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry', 'Cfront4.png')).convert_alpha()
-cLeftIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry','4-cherry-L.png')).convert_alpha()
-cRightIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry','4-cherry-R.png')).convert_alpha()
-
+CFRONTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','cherry', 'Cfront4.png')).convert_alpha()
+CLEFTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0cherry','Lcherry4.png')).convert_alpha()
+CRIGHTIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters init','0cherry','Rcherry4.png')).convert_alpha()
 
 #----------------------------------------card instantiation---------------------------------------
 
@@ -512,42 +492,28 @@ cRightIV = pygame.image.load(os.path.join(os.path.dirname(__file__), 'characters
 # self.imageL = image[0], self.imageR = image[1], self.cardF = card[0], self.cardB = card[1], self.name = name, self.rank = rank, self.typec = typec, self.hp = hp
 
 #Hearts
-QEPSI_IV = card(pos=(200, 200), image=(QLEFTIV, QRIGHTIV), card=(QRIGHTIV, BACKCARD), name="Qepsi IV", rank="IV", typec="Hearts", hp=225)
-QEPSI_III = card(pos=(200, 200), image=(QLEFTIII, QRIGHTIII), card=(QFRONTIII, BACKCARD), name="Qepsi III", rank="III", typec="Hearts", hp=175)
-QEPSI_II = card(pos=(200, 200), image=(QLEFTII, QRIGHTII), card=(QFRONTII, BACKCARD), name="Qepsi II", rank="II", typec="Hearts", hp=125)
-
-
-
-
-
-
-
-#=====================================this is the only one that matters atm==========================================================
-QEPSI_I = card(pos=(625, 469), image=(QLEFTI, QRIGHTI), card=(QFRONTI, BACKCARD), name="Qepsi I", rank="I", typec="Hearts", hp= 75)
-#=================================================JUMP TO LINE 557=======================================================
-
-
-
-
-
+QEPSI_IV = card(image=(QLEFTIV, QRIGHTIV), card=(QRIGHTIV, BACKCARD), name="Qepsi IV", rank="IV", typec="Hearts", hp=225)
+QEPSI_III = card(image=(QLEFTIII, QRIGHTIII), card=(QFRONTIII, BACKCARD), name="Qepsi III", rank="III", typec="Hearts", hp=175)
+QEPSI_II = card(image=(QLEFTII, QRIGHTII), card=(QFRONTII, BACKCARD), name="Qepsi II", rank="II", typec="Hearts", hp=125)
+QEPSI_I = card(image=(QLEFTI, QRIGHTI), card=(QFRONTI, BACKCARD), name="Qepsi I", rank="I", typec="Hearts", hp= 75)
 
 #Spades
-mangoIV = card(pos=(200, 200), image=(mLeftI, mRightI), card=(mFrontI, BACKCARD), name="Mango IV", rank="IV", typec="Spades", hp=225)
-mangoIII = card(pos=(200, 200), image=(mLeftII, mRightII), card=(mFrontII, BACKCARD), name="Mango III", rank="III", typec="Spades", hp=175)
-mangoII = card(pos=(200, 200), image=(mLeftIII, mRightIII), card=(mFrontIII, BACKCARD), name="Mango II", rank="II", typec="Spades", hp=125)
-mangoI = card(pos=(200, 200), image=(mLeftIV, mRightIV), card=(mFrontIV, BACKCARD), name="Mango I", rank="I", typec="Spades", hp=75)
+MANGOIV = card(image=(MLEFTI, MRIGHTI), card=(MFRONTI, BACKCARD), name="Mango IV", rank="IV", typec="Spades", hp=225)
+MANGOIII = card(image=(MLEFTII, MRIGHTII), card=(MFRONTII, BACKCARD), name="Mango III", rank="III", typec="Spades", hp=175)
+MANGOII = card(image=(MLEFTIII, MRIGHTIII), card=(MFRONTIII, BACKCARD), name="Mango II", rank="II", typec="Spades", hp=125)
+MANGOI = card(image=(MLEFTIV, MRIGHTIV), card=(MFRONTIV, BACKCARD), name="Mango I", rank="I", typec="Spades", hp=75)
 
 #Diamonds
-riverIV = card(pos=(200, 200), image=(rLeftI, rRightI), card=(rFrontI, BACKCARD), name="River IV", rank="IV", typec="Diamonds", hp=225)
-riverIII = card(pos=(200, 200), image=(rLeftII, rRightII), card=(rFrontII, BACKCARD), name="River III", rank="III", typec="Diamonds", hp=175)
-riverII = card(pos=(200, 200), image=(rLeftIII, rRightIII), card=(rFrontIII, BACKCARD), name="River II", rank="II", typec="Diamonds", hp=125)
-riverI = card(pos=(200, 200), image=(rLeftIV, rRightIV), card=(rFrontIV, BACKCARD), name="River I", rank="I", typec="Diamonds", hp=75)
+RIVERIV = card(image=(RLEFTI, RRIGHTI), card=(RFRONTI, BACKCARD), name="River IV", rank="IV", typec="Diamonds", hp=225)
+RIVERIII = card(image=(RLEFTII, RRIGHTII), card=(RFRONTII, BACKCARD), name="River III", rank="III", typec="Diamonds", hp=175)
+RIVERII = card(image=(RLEFTIII, RRIGHTIII), card=(RFRONTIII, BACKCARD), name="River II", rank="II", typec="Diamonds", hp=125)
+RIVERI = card(image=(RLEFTIV, RRIGHTIV), card=(RFRONTIV, BACKCARD), name="River I", rank="I", typec="Diamonds", hp=75)
 
 #Clovers
-cherryIV = card(pos=(200, 200), image=(cLeftI, cRightI), card=(cFrontI, BACKCARD), name="Cherry IV", rank="IV", typec="Clovers", hp=225)
-cherryIII = card(pos=(200, 200), image=(cLeftII, cRightII), card=(cFrontII, BACKCARD), name="Cherry III", rank="III", typec="Clovers", hp=175)
-cherryII = card(pos=(200, 200), image=(cLeftIII, cRightIII), card=(cFrontIII, BACKCARD), name="Cherry II", rank="II", typec="Clovers", hp=125)
-cherryI = card(pos=(200, 200), image=(cLeftIV, cRightIV), card=(cFrontIV, BACKCARD), name="Cherry I", rank="I", typec="Clovers", hp=75)
+CHERRYIV = card(image=(CLEFTI, CRIGHTI), card=(CFRONTI, BACKCARD), name="Cherry IV", rank="IV", typec="Clovers", hp=225)
+CHERRYIII = card(image=(CLEFTII, CRIGHTII), card=(CFRONTII, BACKCARD), name="Cherry III", rank="III", typec="Clovers", hp=175)
+CHERRYII = card(image=(CLEFTIII, CRIGHTIII), card=(CFRONTIII, BACKCARD), name="Cherry II", rank="II", typec="Clovers", hp=125)
+CHERRYI = card(image=(CLEFTIV, CRIGHTIV), card=(CFRONTIV, BACKCARD), name="Cherry I", rank="I", typec="Clovers", hp=75)
 
 # This is where all the cards are "stored" and this ensures that both the user and computer do not get duplicate cards, as it deletes chosen ones as it goes along.
 #deck = [qepsiI, qepsiII, qepsiIII, qepsiIV, mangoI, mangoII, mangoIII, mangoIV, riverI, riverII, riverIII, riverIV, cherryI, cherryII, cherryIII, cherryIV]
@@ -570,7 +536,7 @@ def revealFrontCard():
         SCREEN.fill("#0f0f0fff")
 
         # change coordinates and location of object
-        QEPSI_I.add(user=QEPSI_I, p=(300, 0))
+        QEPSI_I.coords(pos=(300, 469))
 
         # load object image onto screen
         QEPSI_I.front(SCREEN)
@@ -586,6 +552,7 @@ def revealSprite():
     while True:
 
         SCREEN.fill("#0f0f0fff")
+        QEPSI_I.coords(pos=(625, 469))
 
         # depict character image and name
         QEPSI_I.reveal(SCREEN)
@@ -600,14 +567,13 @@ def revealSprite():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if QEPSI_I.checkInput(position=pygame.mouse.get_pos()):
                     revealFrontCard()
-
         pygame.display.update()
  
-
 def cardBack():
     while True:
 
         SCREEN.fill("black")
+        QEPSI_I.coords(pos=(625, 469))
         QEPSI_I.back(screen=SCREEN)        
         REVEAL_TEXT = getFont(50).render("Click to reveal card!", True, "#c71e1e")
         REVEAL_TEXTRECT = REVEAL_TEXT.get_rect(center=(627, 150))
