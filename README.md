@@ -29,9 +29,9 @@ Run down of the different sections of my code
     
     iv. checkInput (check if mouse clicks on object)
     
-    vi. reveal (blit the character image)
+    v. reveal (blit the character image)
     
-    vii. bA (assigns the values of different stats to different ranks)
+    vi. bA (assigns the values of different stats to different ranks)
     
         a. base attack value = range of basic damage that can be dealt
         
@@ -41,9 +41,9 @@ Run down of the different sections of my code
         
         d. total random rate = value used for attack method
         
-    viii. alive (flag to stop attacking when opponent/user has less than 0 HP)
+    vii. alive (flag to stop attacking when opponent/user has less than 0 HP)
     
-    ix. attack (method to attack opponent and affect opponent HP)
+    viii. attack (method to attack opponent and affect opponent HP)
     
 3. loading of images rank and type
     i. ranks = I, II, III, IV
