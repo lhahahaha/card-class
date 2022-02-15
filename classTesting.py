@@ -104,6 +104,7 @@ class card:
 
             return flag
 
+#========================================this bit could be made a lot shorter surely?=======================================        
     def attack(self, user, opponent):
         # function for attacking opponents, parameters are for the player's card (user) which would be attacking, and the opponent's card which is selected to be attacked
 
