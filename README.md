@@ -1,47 +1,35 @@
 # card-class
 class for instantiation of card objects
 
-current issue: cannot change the location of the images, the (x, y) coordinates are fixed to the __init__ method and when the object is instantiated; the values cannot be changed
-images used for current test are uploaded as pngs if needed
-
-
-FOR THE RELEVANT ISSUES AROUND CHANGING THE (X, Y) COORDINATES
-
-1. read from lines 10 - 62
-2. jump to lines 525 - 527 
-3. then jump to lines 558 - 627
+current issue: Lots of repetition in the attack method, probably could be shortened
+FOR LINES ON THE ATTACK METHOD: read Lines 108 - 404
 
 -------------------------------------------------------------------------------
 Run down of the different sections of my code
 1. initialisation of card attributes:
-
-    i. pos (tuple input of x and y coordinates)
     
-    ii. image (tuple input of left and right facing character images)
+    i. image (tuple input of left and right facing character images)
     
-    iii. card (tuple of front and back of card)
+    ii. card (tuple of front and back of card)
     
-    iv. name
+    iii. name
     
-    v. rank
+    iv. rank
     
-    vi. typec ('type' is already a command)
+    v. typec ('type' is already a command)
     
-    vii. HP 
+    vi. HP 
     
 2. creation of methods to allow for interation and battle sequence
+    i. coords (allows for coordinates/location of images of object to be manipulated and changed when necessary)
 
-    i. back (blit the back of the card to the screen)
+    ii. back (blit the back of the card to the screen)
     
-    ii. front (blit the front of the card)
+    iii. front (blit the front of the card)
     
-    iii. checkInput (check if mouse clicks on object)
+    iv. checkInput (check if mouse clicks on object)
     
-    iv. reveal (blit the character image)
-    
-    v. add (meant to allow for the original init set (x, y) coordinates to be changed - doesn't work)
-    
-    vi. changeCoords (same intent as above, but also does not work)
+    vi. reveal (blit the character image)
     
     vii. bA (assigns the values of different stats to different ranks)
     
