@@ -549,7 +549,7 @@ def revealFrontCard():
         
         pygame.display.update()
 
-def revealSprite():
+def revealCharacter():
     while True:
 
         SCREEN.fill("#0f0f0fff")
